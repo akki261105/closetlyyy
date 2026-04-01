@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Closetlyy 🎀</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@300;400;500;600&family=Sacramento&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --blush: #fad4de;
+  --rose: #f0a0b8;
+  --dusty: #e07898;
+  --deep: #c0506e;
+  --petal: #fff0f4;
+  --cream: #fff8fa;
+  --mauve: #d888a2;
+  --soft: #f5c0d0;
+  --text: #4a2030;
+  --muted: #9a6070;
+  --white: #ffffff;
+  --shadow: rgba(192, 80, 110, 0.13);
+}
+
+body {
+  font-family: 'Quicksand', sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ═══ FLOATING PETALS BG ═══ */
+.bg-deco {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
+}
+.petal-dot {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.18;
+  animation: floatDot linear infinite;
+}
+@keyframes floatDot {
+  0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.18; }
+  90% { opacity: 0.18; }
+  100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+}
+
+/* ═══ AUTH SCREEN ═══ */
+#authScreen {
+  position: relative; z-index: 10;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background:
+    radial-gradient(ellipse at 20% 30%, #fce0e8 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 70%, #fad4de 0%, transparent 55%),
+    var(--cream);
+}
+
+.auth-box {
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(12px);
+  border-radius: 28px;
+  border: 2px solid var(--soft);
+  padding: 2.5rem 2.2rem;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 20px 60px rgba(192,80,110,0.18);
+  animation: authPop 0.5s cubic-bezier(.22,.68,0,1.3);
+}
+@keyframes authPop {
+  from { opacity: 0; transform: scale(0.92) translateY(20px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.auth-logo {
+  text-align: center;
+  margin-bottom: 1.8rem;
+}
+
+.auth-logo .brand {
+  font-family: 'Pacifico', cursive;
+  font-size: 2.8rem;
+  color: var(--deep);
+  letter-spacing: -1px;
+  line-height: 1;
+  text-shadow: 2px 3px 0px #f5c0d0, 4px 6px 0px rgba(192,80,110,0.12);
+  display: block;
+}
+
+.auth-logo .tagline {
+  font-family: 'Sacramento', cursive;
+  font-size: 1.1rem;
+  color: var(--mauve);
+  margin-top: 4px;
+  display: block;
+}
+
+.auth-logo .hanger {
+  font-size: 2.2rem;
+  display: block;
+  margin-bottom: 0.3rem;
+  animation: swing 2s ease-in-out infinite;
+  transform-origin: top center;
+}
+@keyframes swing {
+  0%,100% { transform: rotate(-8deg); }
+  50% { transform: rotate(8deg); }
+}
+
+/* ── Tabs ── */
+.auth-tabs {
+  display: flex;
+  background: var(--petal);
+  border-radius: 14px;
+  padding: 4px;
+  margin-bottom: 1.5rem;
+  border: 1.5px solid var(--soft);
+}
+
+.auth-tab {
+  flex: 1;
+  padding: 0.55rem;
+  border: none;
+  background: transparent;
+  border-radius: 11px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--muted);
+  transition: all 0.2s;
+}
+
+.auth-tab.active {
+  background: white;
+  color: var(--deep);
+  box-shadow: 0 2px 10px rgba(192,80,110,0.15);
+}
+
+/* ── Form fields ── */
+.field-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; }
+.field-group label { font-size: 0.78rem; font-weight: 600; color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; }
+
+.field-wrap {
+  position: relative;
+}
+.field-wrap .field-icon {
+  position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
+  font-size: 1rem; pointer-events: none;
+}
+.field-wrap input {
+  width: 100%;
+  padding: 0.65rem 0.9rem 0.65rem 2.4rem;
+  border: 1.5px solid var(--soft);
+  border-radius: 12px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text);
+  background: var(--petal);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.field-wrap input:focus {
+  border-color: var(--dusty);
+  box-shadow: 0 0 0 3px rgba(224,120,152,0.15);
+  background: white;
+}
+
+.auth-btn {
+  width: 100%;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 14px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--rose) 0%, var(--dusty) 60%, var(--deep) 100%);
+  color: white;
+  letter-spacing: 0.03em;
+  box-shadow: 0 4px 18px rgba(192,80,110,0.32);
+  transition: all 0.2s;
+  margin-top: 0.3rem;
+  position: relative;
+  overflow: hidden;
+}
+.auth-btn::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 60%);
+  pointer-events: none;
+}
+.auth-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 22px rgba(192,80,110,0.4); }
+.auth-btn:active { transform: scale(0.98); }
+
+.auth-error {
+  background: #fff0f4;
+  border: 1.5px solid #f5c0d0;
+  color: var(--deep);
+  border-radius: 10px;
+  padding: 0.6rem 0.9rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+  margin-bottom: 0.8rem;
+  display: none;
+}
+
+.auth-footer {
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-top: 1.2rem;
+}
+
+/* ═══ MAIN APP ═══ */
+#appScreen { display: none; position: relative; z-index: 10; min-height: 100vh; }
+
+/* ── Header ── */
+header {
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 2px solid var(--soft);
+  padding: 0.9rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky; top: 0; z-index: 100;
+}
+
+.header-brand {
+  font-family: 'Pacifico', cursive;
+  font-size: 1.7rem;
+  color: var(--deep);
+  letter-spacing: -0.5px;
+  text-shadow: 1px 2px 0px #f5c0d0;
+}
+
+.header-right { display: flex; align-items: center; gap: 1rem; }
+
+.user-chip {
+  display: flex; align-items: center; gap: 7px;
+  background: var(--petal);
+  border: 1.5px solid var(--soft);
+  border-radius: 30px;
+  padding: 0.35rem 0.9rem 0.35rem 0.5rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--deep);
+}
+
+.avatar {
+  width: 26px; height: 26px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--rose), var(--dusty));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.7rem; font-weight: 700; color: white;
+}
+
+.logout-btn {
+  background: none; border: 1.5px solid var(--soft);
+  border-radius: 10px; padding: 0.35rem 0.8rem;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.8rem; font-weight: 600;
+  color: var(--muted); cursor: pointer;
+  transition: all 0.15s;
+}
+.logout-btn:hover { background: var(--petal); color: var(--deep); border-color: var(--rose); }
+
+/* ── Layout ── */
+.app-layout {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.8rem 1.5rem;
+  display: grid;
+  grid-template-columns: 270px 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+/* ── Card ── */
+.card {
+  background: rgba(255,255,255,0.95);
+  border-radius: 20px;
+  border: 1.5px solid var(--soft);
+  padding: 1.2rem;
+  box-shadow: 0 4px 20px var(--shadow);
+}
+
+.card-title {
+  font-family: 'Pacifico', cursive;
+  font-size: 0.95rem;
+  color: var(--deep);
+  margin-bottom: 1rem;
+  display: flex; align-items: center; gap: 8px;
+  letter-spacing: 0.02em;
+}
+
+/* ── Sidebar ── */
+.sidebar { display: flex; flex-direction: column; gap: 1rem; position: sticky; top: 85px; }
+
+/* ── Upload zone ── */
+.upload-zone {
+  border: 2px dashed var(--rose);
+  border-radius: 14px;
+  padding: 1.3rem 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: var(--petal);
+  position: relative;
+}
+.upload-zone:hover { border-color: var(--dusty); background: #fce8ef; }
+.upload-zone input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+.upload-icon { font-size: 1.8rem; margin-bottom: 0.4rem; }
+.upload-zone p { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+.upload-zone strong { color: var(--dusty); }
+.upload-preview { width: 100%; height: 100px; object-fit: cover; border-radius: 10px; margin-top: 0.6rem; display: none; }
+
+/* ── Inputs ── */
+.field { display: flex; flex-direction: column; gap: 0.35rem; margin-bottom: 0.7rem; }
+.field label { font-size: 0.73rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+.field input, .field select {
+  padding: 0.55rem 0.8rem;
+  border: 1.5px solid var(--soft);
+  border-radius: 11px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.87rem; font-weight: 500;
+  color: var(--text);
+  background: var(--petal);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.field input:focus, .field select:focus { border-color: var(--dusty); background: white; }
+
+/* ── Buttons ── */
+.btn {
+  width: 100%; padding: 0.7rem 1rem;
+  border: none; border-radius: 13px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.9rem; font-weight: 700;
+  cursor: pointer; transition: all 0.18s;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--rose), var(--dusty));
+  color: white;
+  box-shadow: 0 3px 14px rgba(192,80,110,0.28);
+}
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 5px 18px rgba(192,80,110,0.35); }
+.btn-primary:active { transform: scale(0.98); }
+.btn-outline {
+  background: var(--petal); color: var(--dusty);
+  border: 1.5px solid var(--rose);
+}
+.btn-outline:hover { background: var(--blush); }
+
+/* ── Filters ── */
+.pills { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.pill {
+  padding: 0.28rem 0.75rem; border-radius: 20px;
+  font-size: 0.76rem; font-weight: 600; cursor: pointer;
+  border: 1.5px solid var(--soft); background: var(--petal); color: var(--muted);
+  transition: all 0.15s;
+}
+.pill.active { background: var(--dusty); color: white; border-color: var(--dusty); }
+.pill:hover:not(.active) { border-color: var(--rose); color: var(--deep); }
+
+/* ── Stats ── */
+.stats-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+.stat-box {
+  background: var(--petal); border-radius: 13px;
+  padding: 0.7rem; text-align: center;
+}
+.stat-box .num { font-size: 1.5rem; font-weight: 700; color: var(--deep); font-family: 'Pacifico', cursive; }
+.stat-box .lbl { font-size: 0.68rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+
+/* ── Main ── */
+.main { display: flex; flex-direction: column; gap: 1.4rem; }
+
+.section-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; }
+.section-header h2 {
+  font-family: 'Pacifico', cursive;
+  font-size: 1.3rem; color: var(--deep);
+  text-shadow: 1px 2px 0 #f5c0d0;
+}
+.item-count { font-size: 0.8rem; color: var(--muted); font-weight: 600; }
+
+/* ── Closet Grid ── */
+.closet-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+  gap: 1rem;
+}
+
+.item-card {
+  background: white;
+  border-radius: 18px;
+  border: 1.5px solid var(--soft);
+  overflow: hidden;
+  transition: all 0.22s;
+  position: relative;
+  box-shadow: 0 2px 12px var(--shadow);
+  animation: cardIn 0.3s ease both;
+}
+@keyframes cardIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+.item-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(192,80,110,0.2); border-color: var(--rose); }
+
+.item-img { width: 100%; height: 155px; object-fit: cover; display: block; }
+.item-img-ph {
+  width: 100%; height: 155px;
+  background: linear-gradient(135deg, var(--petal), var(--blush));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2.8rem;
+}
+.item-info { padding: 0.65rem 0.75rem; }
+.item-name { font-size: 0.83rem; font-weight: 600; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 4px; }
+.item-tag { display: inline-block; padding: 2px 9px; border-radius: 8px; font-size: 0.7rem; font-weight: 700; }
+
+.item-del {
+  position: absolute; top: 7px; right: 7px;
+  width: 26px; height: 26px; border-radius: 50%;
+  background: rgba(255,255,255,0.93); border: none; cursor: pointer;
+  font-size: 0.75rem; display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity 0.15s; color: var(--deep); font-weight: 700;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.12);
+}
+.item-card:hover .item-del { opacity: 1; }
+
+/* ── Empty state ── */
+.empty-state {
+  grid-column: 1/-1; text-align: center; padding: 3rem 1rem; color: var(--muted);
+}
+.empty-state .ei { font-size: 3.5rem; margin-bottom: 0.8rem; animation: bounce 1.5s ease-in-out infinite; }
+@keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+.empty-state h3 { font-family: 'Pacifico', cursive; font-size: 1.1rem; color: var(--dusty); margin-bottom: 0.4rem; }
+.empty-state p { font-size: 0.83rem; }
+
+/* ── Tag colors ── */
+.tag-tops { background: #fce8f0; color: #b0526a; }
+.tag-bottoms { background: #e8eeff; color: #5262a0; }
+.tag-dresses { background: #f3e8fc; color: #7d52b0; }
+.tag-outerwear { background: #e8fcf0; color: #52a070; }
+.tag-shoes { background: #fceee8; color: #a07052; }
+.tag-accessories { background: #fcf8e8; color: #a09052; }
+.tag-bags { background: #e8f8fc; color: #5298b0; }
+.tag-other { background: #f5f0f0; color: #887080; }
+
+/* ── Outfit Modal ── */
+.overlay {
+  position: fixed; inset: 0;
+  background: rgba(74,32,48,0.5);
+  z-index: 200;
+  display: flex; align-items: center; justify-content: center;
+  padding: 1rem;
+  animation: fadeIn 0.2s;
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.modal {
+  background: var(--cream);
+  border-radius: 26px;
+  padding: 2rem;
+  max-width: 480px; width: 100%;
+  border: 2px solid var(--soft);
+  box-shadow: 0 24px 70px rgba(192,80,110,0.28);
+  animation: slideUp 0.28s cubic-bezier(.22,.68,0,1.2);
+  max-height: 90vh; overflow-y: auto;
+}
+@keyframes slideUp { from { transform: translateY(25px) scale(0.97); opacity:0; } to { transform: translateY(0) scale(1); opacity:1; } }
+
+.modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.4rem; }
+.modal-header h2 { font-family: 'Pacifico', cursive; font-size: 1.4rem; color: var(--deep); text-shadow: 1px 2px 0 #f5c0d0; }
+.modal-close {
+  width: 32px; height: 32px; border-radius: 50%;
+  border: 1.5px solid var(--soft); background: var(--petal); cursor: pointer;
+  font-size: 1rem; display: flex; align-items: center; justify-content: center; color: var(--muted);
+  transition: all 0.15s;
+}
+.modal-close:hover { background: var(--blush); color: var(--deep); }
+
+.outfit-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem; margin-bottom: 1.4rem; }
+.outfit-item { background: white; border-radius: 15px; border: 1.5px solid var(--soft); overflow: hidden; }
+.outfit-item img { width: 100%; height: 130px; object-fit: cover; }
+.outfit-item-ph { width: 100%; height: 130px; background: linear-gradient(135deg, var(--petal), var(--blush)); display: flex; align-items: center; justify-content: center; font-size: 2rem; }
+.outfit-item-info { padding: 0.5rem 0.65rem; }
+.outfit-item-info .name { font-size: 0.8rem; font-weight: 600; color: var(--text); }
+.outfit-item-info .cat { font-size: 0.7rem; color: var(--muted); }
+
+.modal-actions { display: flex; gap: 0.7rem; }
+.modal-actions .btn { flex: 1; }
+
+/* ── Saved ── */
+.saved-strip { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.saved-badge {
+  background: var(--petal); border: 1.5px solid var(--rose);
+  border-radius: 11px; padding: 0.38rem 0.75rem;
+  font-size: 0.77rem; font-weight: 600; color: var(--dusty);
+  cursor: pointer; transition: background 0.15s;
+}
+.saved-badge:hover { background: var(--blush); }
+
+/* ── Toast ── */
+.toast {
+  position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%);
+  background: var(--deep); color: white;
+  padding: 0.65rem 1.4rem; border-radius: 30px;
+  font-size: 0.86rem; font-weight: 600; z-index: 300;
+  box-shadow: 0 4px 20px rgba(192,80,110,0.38);
+  animation: toastIn 0.25s, toastOut 0.25s 2.5s forwards;
+  white-space: nowrap;
+}
+@keyframes toastIn { from { opacity:0; transform: translateX(-50%) translateY(12px); } to { opacity:1; transform: translateX(-50%) translateY(0); } }
+@keyframes toastOut { to { opacity:0; transform: translateX(-50%) translateY(12px); } }
+
+/* ── Generate Outfit Btn ── */
+.gen-btn {
+  width: 100%; padding: 0.95rem;
+  border: none; border-radius: 16px;
+  font-family: 'Pacifico', cursive;
+  font-size: 1rem; letter-spacing: 0.03em;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--rose) 0%, var(--dusty) 55%, var(--deep) 100%);
+  color: white;
+  box-shadow: 0 5px 20px rgba(192,80,110,0.35);
+  transition: all 0.2s;
+  position: relative; overflow: hidden;
+}
+.gen-btn::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.18) 0%, transparent 55%);
+}
+.gen-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 26px rgba(192,80,110,0.42); }
+.gen-btn:active { transform: scale(0.98); }
+
+@media (max-width: 720px) {
+  .app-layout { grid-template-columns: 1fr; }
+  .sidebar { position: static; }
+  header { padding: 0.8rem 1rem; }
+  .header-brand { font-size: 1.3rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- BG DECO -->
+<div class="bg-deco" id="bgDeco"></div>
+
+<!-- ═══ AUTH SCREEN ═══ -->
+<div id="authScreen">
+  <div class="auth-box">
+    <div class="auth-logo">
+      <span class="hanger">🪡</span>
+      <span class="brand">closetlyy</span>
+      <span class="tagline">your digital wardrobe bestie ✨</span>
+    </div>
+
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="tabLogin" onclick="switchTab('login')">Sign In</button>
+      <button class="auth-tab" id="tabSignup" onclick="switchTab('signup')">Create Account</button>
+    </div>
+
+    <div class="auth-error" id="authError"></div>
+
+    <!-- Login -->
+    <div id="loginForm">
+      <div class="field-group">
+        <label>Username</label>
+        <div class="field-wrap">
+          <span class="field-icon">🌸</span>
+          <input type="text" id="loginUser" placeholder="your username" autocomplete="username">
+        </div>
+      </div>
+      <div class="field-group">
+        <label>Password</label>
+        <div class="field-wrap">
+          <span class="field-icon">🔒</span>
+          <input type="password" id="loginPass" placeholder="your password" autocomplete="current-password">
+        </div>
+      </div>
+      <button class="auth-btn" onclick="doLogin()">💖 Sign In to Closetlyy</button>
+    </div>
+
+    <!-- Signup -->
+    <div id="signupForm" style="display:none;">
+      <div class="field-group">
+        <label>Your Name</label>
+        <div class="field-wrap">
+          <span class="field-icon">✨</span>
+          <input type="text" id="signupName" placeholder="e.g. Sophie">
+        </div>
+      </div>
+      <div class="field-group">
+        <label>Username</label>
+        <div class="field-wrap">
+          <span class="field-icon">🌸</span>
+          <input type="text" id="signupUser" placeholder="pick a cute username" autocomplete="username">
+        </div>
+      </div>
+      <div class="field-group">
+        <label>Password</label>
+        <div class="field-wrap">
+          <span class="field-icon">🔒</span>
+          <input type="password" id="signupPass" placeholder="at least 6 characters" autocomplete="new-password">
+        </div>
+      </div>
+      <div class="field-group">
+        <label>Confirm Password</label>
+        <div class="field-wrap">
+          <span class="field-icon">🎀</span>
+          <input type="password" id="signupPass2" placeholder="repeat password" autocomplete="new-password">
+        </div>
+      </div>
+      <button class="auth-btn" onclick="doSignup()">🎀 Create My Closet</button>
+    </div>
+
+    <div class="auth-footer">By signing in you agree to keep it cute 🌷</div>
+  </div>
+</div>
+
+<!-- ═══ APP SCREEN ═══ -->
+<div id="appScreen">
+  <header>
+    <div class="header-brand">closetlyy</div>
+    <div class="header-right">
+      <div class="user-chip">
+        <div class="avatar" id="userAvatar">?</div>
+        <span id="userLabel">—</span>
+      </div>
+      <button class="logout-btn" onclick="doLogout()">Sign out</button>
+    </div>
+  </header>
+
+  <div class="app-layout">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+      <div class="card">
+        <div class="card-title">🧺 Add Item</div>
+        <div class="upload-zone" id="uploadZone">
+          <input type="file" id="fileInput" accept="image/*">
+          <div class="upload-icon">📷</div>
+          <p><strong>Tap to upload</strong><br>a photo of your item</p>
+          <img class="upload-preview" id="uploadPreview">
+        </div>
+        <div style="margin-top:0.8rem;">
+          <div class="field">
+            <label>Item name</label>
+            <input type="text" id="itemName" placeholder="e.g. Silk midi skirt">
+          </div>
+          <div class="field">
+            <label>Category</label>
+            <select id="catSelect">
+              <option value="">Choose…</option>
+              <option value="tops">👕 Tops</option>
+              <option value="bottoms">👖 Bottoms</option>
+              <option value="dresses">👗 Dresses</option>
+              <option value="outerwear">🧥 Outerwear</option>
+              <option value="shoes">👠 Shoes</option>
+              <option value="accessories">💍 Accessories</option>
+              <option value="bags">👜 Bags</option>
+              <option value="other">✨ Other</option>
+            </select>
+          </div>
+          <button class="btn btn-primary" onclick="addItem()">➕ Add to Closet</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">🔍 Filter</div>
+        <div class="pills" id="filterPills"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">📊 My Stats</div>
+        <div class="stats-row">
+          <div class="stat-box"><div class="num" id="stTotal">0</div><div class="lbl">Items</div></div>
+          <div class="stat-box"><div class="num" id="stOutfits">0</div><div class="lbl">Outfits</div></div>
+          <div class="stat-box"><div class="num" id="stCats">0</div><div class="lbl">Categories</div></div>
+          <div class="stat-box"><div class="num" id="stFav">—</div><div class="lbl">Top pick</div></div>
+        </div>
+      </div>
+
+      <button class="gen-btn" onclick="generateOutfit()">🎲 Generate Outfit</button>
+
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+      <div class="section-header">
+        <h2>My Wardrobe</h2>
+        <span class="item-count" id="itemCount">0 items</span>
+      </div>
+
+      <div class="closet-grid" id="closetGrid"></div>
+
+      <div id="savedSection" style="display:none;">
+        <div class="card">
+          <div class="card-title">💾 Saved Outfits</div>
+          <div class="saved-strip" id="savedStrip"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- OUTFIT MODAL -->
+<div class="overlay" id="outfitModal" style="display:none;">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>✨ Today's Look</h2>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="outfit-grid" id="outfitGrid"></div>
+    <div class="modal-actions">
+      <button class="btn btn-outline" onclick="generateOutfit()">🔄 Reshuffle</button>
+      <button class="btn btn-primary" onclick="saveOutfit()">💾 Save Look</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══ FLOATING DOTS ═══
+(function(){
+  const bg = document.getElementById('bgDeco');
+  const colors = ['#f5c0d0','#fad4de','#f0a0b8','#e8d0d8','#fce8ef'];
+  for (let i = 0; i < 18; i++) {
+    const d = document.createElement('div');
+    d.className = 'petal-dot';
+    const size = 8 + Math.random() * 22;
+    d.style.cssText = `
+      width:${size}px; height:${size}px;
+      left:${Math.random()*100}%;
+      background:${colors[Math.floor(Math.random()*colors.length)]};
+      animation-duration:${10+Math.random()*20}s;
+      animation-delay:${-Math.random()*20}s;
+    `;
+    bg.appendChild(d);
+  }
+})();
+
+// ═══ AUTH ═══
+const USERS_KEY = 'closetlyy_users';
+const SESSION_KEY = 'closetlyy_session';
+
+function getUsers() { return JSON.parse(localStorage.getItem(USERS_KEY) || '{}'); }
+function saveUsers(u) { localStorage.setItem(USERS_KEY, JSON.stringify(u)); }
+function getSession() { return localStorage.getItem(SESSION_KEY); }
+function setSession(u) { localStorage.setItem(SESSION_KEY, u); }
+function clearSession() { localStorage.removeItem(SESSION_KEY); }
+
+function showError(msg) {
+  const el = document.getElementById('authError');
+  el.textContent = msg; el.style.display = 'block';
+  setTimeout(() => el.style.display = 'none', 3500);
+}
+
+function switchTab(tab) {
+  document.getElementById('loginForm').style.display = tab === 'login' ? '' : 'none';
+  document.getElementById('signupForm').style.display = tab === 'signup' ? '' : 'none';
+  document.getElementById('tabLogin').classList.toggle('active', tab === 'login');
+  document.getElementById('tabSignup').classList.toggle('active', tab === 'signup');
+  document.getElementById('authError').style.display = 'none';
+}
+
+function doLogin() {
+  const user = document.getElementById('loginUser').value.trim().toLowerCase();
+  const pass = document.getElementById('loginPass').value;
+  if (!user || !pass) { showError('🌸 Please fill in both fields!'); return; }
+  const users = getUsers();
+  if (!users[user]) { showError('🥺 Username not found. Create an account!'); return; }
+  if (users[user].password !== btoa(pass)) { showError('🔒 Wrong password, try again!'); return; }
+  setSession(user);
+  enterApp(user, users[user].name);
+}
+
+function doSignup() {
+  const name = document.getElementById('signupName').value.trim();
+  const user = document.getElementById('signupUser').value.trim().toLowerCase();
+  const pass = document.getElementById('signupPass').value;
+  const pass2 = document.getElementById('signupPass2').value;
+  if (!name || !user || !pass) { showError('🌸 Please fill in all fields!'); return; }
+  if (user.length < 3) { showError('🌷 Username needs at least 3 characters!'); return; }
+  if (pass.length < 6) { showError('🔒 Password needs at least 6 characters!'); return; }
+  if (pass !== pass2) { showError('🥺 Passwords do not match!'); return; }
+  const users = getUsers();
+  if (users[user]) { showError('🌸 That username is taken, try another!'); return; }
+  users[user] = { name, password: btoa(pass), wardrobe: [], outfits: [] };
+  saveUsers(users);
+  setSession(user);
+  enterApp(user, name);
+}
+
+function enterApp(username, displayName) {
+  document.getElementById('authScreen').style.display = 'none';
+  document.getElementById('appScreen').style.display = 'block';
+  document.getElementById('userLabel').textContent = displayName || username;
+  document.getElementById('userAvatar').textContent = (displayName || username).charAt(0).toUpperCase();
+  currentUser = username;
+  loadUserData();
+  renderAll();
+}
+
+function doLogout() {
+  clearSession();
+  currentUser = null;
+  wardrobe = []; savedOutfits = [];
+  document.getElementById('appScreen').style.display = 'none';
+  document.getElementById('authScreen').style.display = 'flex';
+  document.getElementById('loginUser').value = '';
+  document.getElementById('loginPass').value = '';
+  pendingDataUrl = null;
+  showToast('👋 Signed out! See you soon!');
+}
+
+// ═══ DATA ═══
+let currentUser = null;
+let wardrobe = [];
+let savedOutfits = [];
+let activeFilter = 'all';
+let currentOutfit = [];
+let pendingDataUrl = null;
+
+const CAT_EMOJI = { tops:'👕', bottoms:'👖', dresses:'👗', outerwear:'🧥', shoes:'👠', accessories:'💍', bags:'👜', other:'✨' };
+const CAT_LABEL = { tops:'Tops', bottoms:'Bottoms', dresses:'Dresses', outerwear:'Outerwear', shoes:'Shoes', accessories:'Accessories', bags:'Bags', other:'Other' };
+
+function loadUserData() {
+  const users = getUsers();
+  if (!users[currentUser]) return;
+  wardrobe = users[currentUser].wardrobe || [];
+  savedOutfits = users[currentUser].outfits || [];
+}
+
+function saveUserData() {
+  const users = getUsers();
+  if (!users[currentUser]) return;
+  users[currentUser].wardrobe = wardrobe;
+  users[currentUser].outfits = savedOutfits;
+  saveUsers(users);
+}
+
+// ═══ FILE INPUT ═══
+document.getElementById('fileInput').addEventListener('change', e => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    pendingDataUrl = ev.target.result;
+    const prev = document.getElementById('uploadPreview');
+    prev.src = pendingDataUrl; prev.style.display = 'block';
+  };
+  reader.readAsDataURL(file);
+});
+
+// ═══ CLOSET ACTIONS ═══
+function addItem() {
+  const name = document.getElementById('itemName').value.trim();
+  const cat = document.getElementById('catSelect').value;
+  if (!name) { showToast('🌸 Give your item a name!'); return; }
+  if (!cat) { showToast('🎀 Pick a category!'); return; }
+  wardrobe.push({ id: Date.now(), name, category: cat, image: pendingDataUrl });
+  saveUserData();
+  renderAll();
+  document.getElementById('itemName').value = '';
+  document.getElementById('catSelect').value = '';
+  const prev = document.getElementById('uploadPreview');
+  prev.style.display = 'none'; prev.src = '';
+  pendingDataUrl = null;
+  document.getElementById('fileInput').value = '';
+  showToast(`${CAT_EMOJI[cat]} "${name}" added! 🎉`);
+}
+
+function deleteItem(id) {
+  wardrobe = wardrobe.filter(i => i.id !== id);
+  saveUserData(); renderAll();
+  showToast('🗑️ Item removed');
+}
+
+// ═══ RENDER ═══
+function renderFilters() {
+  const cats = [...new Set(wardrobe.map(i => i.category))];
+  const el = document.getElementById('filterPills');
+  el.innerHTML = `<div class="pill ${activeFilter==='all'?'active':''}" onclick="setFilter('all')">All ✨</div>` +
+    cats.map(c => `<div class="pill ${activeFilter===c?'active':''}" onclick="setFilter('${c}')">${CAT_EMOJI[c]} ${CAT_LABEL[c]}</div>`).join('');
+}
+
+function setFilter(cat) { activeFilter = cat; renderAll(); }
+
+function renderGrid() {
+  const items = activeFilter === 'all' ? wardrobe : wardrobe.filter(i => i.category === activeFilter);
+  const g = document.getElementById('closetGrid');
+  document.getElementById('itemCount').textContent = `${items.length} item${items.length!==1?'s':''}`;
+
+  if (items.length === 0) {
+    g.innerHTML = `<div class="empty-state">
+      <div class="ei">${activeFilter==='all'?'🌸':'👀'}</div>
+      <h3>${activeFilter==='all'?'Your closet is empty':'Nothing here yet!'}</h3>
+      <p>${activeFilter==='all'?'Upload your first piece and build your wardrobe!':'Try another category or add some items here!'}</p>
+    </div>`; return;
+  }
+
+  g.innerHTML = items.map(item => `
+    <div class="item-card">
+      ${item.image ? `<img class="item-img" src="${item.image}" alt="${item.name}">` : `<div class="item-img-ph">${CAT_EMOJI[item.category]}</div>`}
+      <div class="item-info">
+        <div class="item-name">${item.name}</div>
+        <span class="item-tag tag-${item.category}">${CAT_EMOJI[item.category]} ${CAT_LABEL[item.category]}</span>
+      </div>
+      <button class="item-del" onclick="deleteItem(${item.id})">✕</button>
+    </div>
+  `).join('');
+}
+
+function renderStats() {
+  const cats = new Set(wardrobe.map(i => i.category));
+  document.getElementById('stTotal').textContent = wardrobe.length;
+  document.getElementById('stOutfits').textContent = savedOutfits.length;
+  document.getElementById('stCats').textContent = cats.size;
+  const freq = {};
+  wardrobe.forEach(i => freq[i.category] = (freq[i.category]||0)+1);
+  const top = Object.entries(freq).sort((a,b)=>b[1]-a[1])[0];
+  document.getElementById('stFav').textContent = top ? CAT_EMOJI[top[0]] : '—';
+}
+
+function renderSaved() {
+  const sec = document.getElementById('savedSection');
+  const strip = document.getElementById('savedStrip');
+  if (!savedOutfits.length) { sec.style.display='none'; return; }
+  sec.style.display = '';
+  strip.innerHTML = savedOutfits.map((o,i) => `<div class="saved-badge">💖 Look ${i+1}</div>`).join('');
+}
+
+function renderAll() { renderFilters(); renderGrid(); renderStats(); renderSaved(); }
+
+// ═══ OUTFIT ═══
+function generateOutfit() {
+  if (!wardrobe.length) { showToast('🌸 Add some clothes first!'); return; }
+  const cats = [...new Set(wardrobe.map(i => i.category))];
+  const hasDress = cats.includes('dresses');
+  const order = ['tops','dresses','bottoms','outerwear','shoes','accessories','bags','other'];
+  const outfit = [];
+  order.forEach(cat => {
+    if (!cats.includes(cat)) return;
+    if (hasDress && (cat==='tops'||cat==='bottoms')) return;
+    if (!hasDress && cat==='dresses') return;
+    const pool = wardrobe.filter(i=>i.category===cat);
+    if (pool.length) outfit.push(pool[Math.floor(Math.random()*pool.length)]);
+  });
+  currentOutfit = outfit;
+  document.getElementById('outfitGrid').innerHTML = outfit.map(item => `
+    <div class="outfit-item">
+      ${item.image?`<img src="${item.image}" alt="${item.name}">`:`<div class="outfit-item-ph">${CAT_EMOJI[item.category]}</div>`}
+      <div class="outfit-item-info">
+        <div class="name">${item.name}</div>
+        <div class="cat">${CAT_EMOJI[item.category]} ${CAT_LABEL[item.category]}</div>
+      </div>
+    </div>
+  `).join('');
+  document.getElementById('outfitModal').style.display = 'flex';
+}
+
+function closeModal() { document.getElementById('outfitModal').style.display = 'none'; }
+document.getElementById('outfitModal').addEventListener('click', e => { if (e.target.id==='outfitModal') closeModal(); });
+
+function saveOutfit() {
+  if (!currentOutfit.length) return;
+  savedOutfits.push({ ids: currentOutfit.map(i=>i.id), names: currentOutfit.map(i=>i.name).join(', ') });
+  saveUserData(); renderAll(); closeModal();
+  showToast('💖 Look saved to your collection!');
+}
+
+// ═══ TOAST ═══
+function showToast(msg) {
+  const old = document.querySelector('.toast'); if (old) old.remove();
+  const t = document.createElement('div'); t.className='toast'; t.textContent=msg;
+  document.body.appendChild(t);
+  setTimeout(()=>t.remove(), 3200);
+}
+
+// ═══ KEYBOARD ═══
+document.addEventListener('keydown', e => {
+  if (e.key==='Enter') {
+    if (document.getElementById('authScreen').style.display!=='none') {
+      const tab = document.getElementById('tabLogin').classList.contains('active');
+      if (tab) doLogin(); else doSignup();
+    }
+  }
+});
+
+// ═══ AUTO LOGIN ═══
+(function(){
+  const sess = getSession();
+  if (sess) {
+    const users = getUsers();
+    if (users[sess]) { enterApp(sess, users[sess].name); }
+  }
+})();
+</script>
+</body>
+</html>
